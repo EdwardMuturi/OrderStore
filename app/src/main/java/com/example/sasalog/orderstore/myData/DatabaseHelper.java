@@ -4,13 +4,11 @@ import android.content.Context;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 
-import com.example.sasalog.orderstore.CustomerContract;
-
 /**
  * Created by sasalog on 9/13/17.
  */
 
-public class OrderStoreDbHelper extends SQLiteOpenHelper {
+public class DatabaseHelper extends SQLiteOpenHelper {
     //create database orderstore
     private  static final String DATABASE_NAME= "orderstore.db";
 
@@ -18,18 +16,18 @@ public class OrderStoreDbHelper extends SQLiteOpenHelper {
     private static final int DATABASE_VERSION= 1;
 
     //constructor that will take a context and call the parent constructor
-    public OrderStoreDbHelper(Context context){
+    public DatabaseHelper(Context context){
         super (context, DATABASE_NAME, null, DATABASE_VERSION);
     }
 
     @Override
     public void onCreate(SQLiteDatabase sqLiteDatabase){
         //create table
-        final String SQL_CREATE_CUSTOMER_TABLE="CREATE TABLE " + CustomerContract.CustomerEntry.TABLE_NAME + " (" +
-                CustomerContract.CustomerEntry._ID +" INTEGER PRIMARY KEY AUTOINCREMENT," +
-                CustomerContract.CustomerEntry.COLUMN_FIRST_NAME + "TEXT NOT NULL, " +
-                CustomerContract.CustomerEntry.COLUMN_LAST_NAME + "TEXT NOT NULL, " +
-                CustomerContract.CustomerEntry.COLUMN_TELEPHONE + "TEXT NOT NULL" +
+        final String SQL_CREATE_CUSTOMER_TABLE="CREATE TABLE " + OrderStoreContract.OrderStoreEntry.TABLE_CUSTOMER + " (" +
+                OrderStoreContract.OrderStoreEntry._ID +" INTEGER PRIMARY KEY AUTOINCREMENT," +
+                OrderStoreContract.OrderStoreEntry.COLUMN_FIRST_NAME + "TEXT NOT NULL, " +
+                OrderStoreContract.OrderStoreEntry.COLUMN_LAST_NAME + "TEXT NOT NULL, " +
+                OrderStoreContract.OrderStoreEntry.COLUMN_TELEPHONE + "TEXT NOT NULL" +
                 "); ";
         //executing above created query
         sqLiteDatabase.execSQL(SQL_CREATE_CUSTOMER_TABLE);
@@ -37,7 +35,7 @@ public class OrderStoreDbHelper extends SQLiteOpenHelper {
 
     @Override
     public void onUpgrade(SQLiteDatabase sqLiteDatabase, int i, int i1) {
-        sqLiteDatabase.execSQL("DROP TABLE IF EXISTS " + CustomerContract.CustomerEntry.TABLE_NAME);
+        sqLiteDatabase.execSQL("DROP TABLE IF EXISTS " + OrderStoreContract.OrderStoreEntry.TABLE_CUSTOMER);
         onCreate(sqLiteDatabase);
     }
 }
