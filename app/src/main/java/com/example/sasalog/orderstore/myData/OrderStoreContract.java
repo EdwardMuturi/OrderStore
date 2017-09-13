@@ -23,6 +23,7 @@ public class OrderStoreContract {
 
         //Orders Table - column names
         public static final String COLUMN_QUANTITY= "quantity";
+        public static final String COLUMN_PRODUCT_PRICE= "price";
         public static final String COLUMN_TOTAL_AMOUNT= "totalAmount";
 
         //Order Lines Table - column names
