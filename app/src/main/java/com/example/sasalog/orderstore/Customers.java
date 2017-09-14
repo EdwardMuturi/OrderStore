@@ -57,6 +57,6 @@ public class Customers {
     }
 
     public String getTelephone(){
-        return this.lastName;
+        return this.telephone;
     }
 }

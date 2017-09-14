@@ -42,9 +42,9 @@ public class MainActivity extends AppCompatActivity {
         cust1.setTelephone("0716238698");
 
         Customers cust2= new Customers( );
-        cust1.setFirstName("Edd");
-        cust1.setLastName("Mutwiri");
-        cust1.setTelephone("0717238698");
+        cust2.setFirstName("Edd");
+        cust2.setLastName("Mutwiri");
+        cust2.setTelephone("0717238698");
 
         db.createCustomer(cust1);
         db.createCustomer(cust2);
@@ -52,7 +52,7 @@ public class MainActivity extends AppCompatActivity {
         Log.d("Get Customers", "Getting all Customers");
         List<Customers> allCustomers= db.getAllCustomers();
         for(Customers customer : allCustomers){
-            Log.d("Customer", " " + customer.getFirstName());
+            Log.d("Customer", " " +customer.getId()+" "+customer.getFirstName()+" "+ customer.getLastName()+" " +customer.getTelephone());
         }
 
         db.closeDB();
