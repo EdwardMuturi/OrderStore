@@ -9,6 +9,8 @@ import android.util.Log;
 import android.widget.SimpleCursorAdapter;
 
 import com.example.sasalog.orderstore.Customers;
+import com.example.sasalog.orderstore.Orders;
+import com.example.sasalog.orderstore.Products;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -16,8 +18,14 @@ import java.util.List;
 import static android.provider.BaseColumns._ID;
 import static com.example.sasalog.orderstore.myData.OrderStoreContract.OrderStoreEntry.COLUMN_FIRST_NAME;
 import static com.example.sasalog.orderstore.myData.OrderStoreContract.OrderStoreEntry.COLUMN_LAST_NAME;
+import static com.example.sasalog.orderstore.myData.OrderStoreContract.OrderStoreEntry.COLUMN_PRODUCT_NAME;
+import static com.example.sasalog.orderstore.myData.OrderStoreContract.OrderStoreEntry.COLUMN_PRODUCT_PRICE;
+import static com.example.sasalog.orderstore.myData.OrderStoreContract.OrderStoreEntry.COLUMN_QUANTITY;
 import static com.example.sasalog.orderstore.myData.OrderStoreContract.OrderStoreEntry.COLUMN_TELEPHONE;
+import static com.example.sasalog.orderstore.myData.OrderStoreContract.OrderStoreEntry.COLUMN_TOTAL_AMOUNT;
 import static com.example.sasalog.orderstore.myData.OrderStoreContract.OrderStoreEntry.TABLE_CUSTOMER;
+import static com.example.sasalog.orderstore.myData.OrderStoreContract.OrderStoreEntry.TABLE_ORDERS;
+import static com.example.sasalog.orderstore.myData.OrderStoreContract.OrderStoreEntry.TABLE_PRODUCT;
 
 /**
  * Created by sasalog on 9/13/17.
@@ -99,9 +107,40 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         values.put(COLUMN_TELEPHONE, customer.getTelephone());
 
         //insert row
-        long customerId= db.insert(TABLE_CUSTOMER, null, values);
-        return customerId;
+        return db.insert(OrderStoreContract.OrderStoreEntry.TABLE_CUSTOMER, null, values);
     }
+
+    //create order table rows
+    public long createOrder(Orders order){
+        SQLiteDatabase db= this.getWritableDatabase();
+
+        ContentValues values= new ContentValues();
+        values.put(COLUMN_QUANTITY, order.getPrice());
+        values.put(COLUMN_PRODUCT_PRICE, order.getPrice());
+        values.put(COLUMN_TOTAL_AMOUNT, order.getTotalAmount());
+
+        //insert row
+        return db.insert(OrderStoreContract.OrderStoreEntry.TABLE_ORDERS, null, values);
+    }
+
+    //create product table rows
+    public long createProduct(Products product){
+        SQLiteDatabase db= this.getWritableDatabase();
+
+        ContentValues values= new ContentValues();
+        values.put(COLUMN_PRODUCT_NAME, product.getProductName());
+        values.put(COLUMN_PRODUCT_PRICE, product.getPrice());
+
+        //insert row
+        return db.insert(OrderStoreContract.OrderStoreEntry.TABLE_PRODUCT, null, values);
+    }
+/*
+    public long createOrderList(){
+        SQLiteDatabase db= this.getWritableDatabase();
+
+        ContentValues values= new ContentValues();
+        values.put
+    }  */
 
     /*Read all table values
         Customer Table*/
@@ -122,7 +161,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
                 cust.setFirstName(c.getString(c.getColumnIndex(COLUMN_FIRST_NAME)));
                 cust.setLastName(c.getString(c.getColumnIndex(COLUMN_LAST_NAME)));
                 cust.setTelephone(c.getString(c.getColumnIndex(COLUMN_TELEPHONE)));
-                //Add to Cisutomers list
+                //Add to Customers list
                 customers.add(cust);
             } while (c.moveToNext() );
 

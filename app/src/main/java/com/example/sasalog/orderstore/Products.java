@@ -7,13 +7,15 @@ package com.example.sasalog.orderstore;
 public class Products {
     int id;
     String productName;
+    int price;
 
     //constructor
     public Products(){}
 
-    public Products(int id, String productName){
+    public Products(int id, String productName, int price){
         this.id= id;
         this.productName= productName;
+        this.price= price;
     }
 
     //setter methods
@@ -21,9 +23,11 @@ public class Products {
         this.id= id;
     }
 
-  public void setProductName(String productName){
+    public void setProductName(String productName){
       this.productName= productName;
   }
+
+    public void setPrice(int price) {this.price= price;}
 
   //getter methods
     public int getId() {
@@ -33,4 +37,6 @@ public class Products {
     public String getProductName(){
         return this.productName;
     }
+
+    public int getPrice(){ return this.price; }
 }
