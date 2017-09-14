@@ -49,30 +49,30 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     //customer table sql
     private static String SQL_CREATE_CUSTOMER_TABLE="CREATE TABLE " + OrderStoreContract.OrderStoreEntry.TABLE_CUSTOMER + " (" +
             OrderStoreContract.OrderStoreEntry._ID +" INTEGER PRIMARY KEY AUTOINCREMENT," +
-            COLUMN_FIRST_NAME + "TEXT, " +
-            OrderStoreContract.OrderStoreEntry.COLUMN_LAST_NAME + "TEXT , " +
-            OrderStoreContract.OrderStoreEntry.COLUMN_TELEPHONE + "TEXT " +
+            COLUMN_FIRST_NAME + " TEXT, " +
+            OrderStoreContract.OrderStoreEntry.COLUMN_LAST_NAME + " TEXT , " +
+            OrderStoreContract.OrderStoreEntry.COLUMN_TELEPHONE + " TEXT " +
             "); ";
     //product table sql
     private static String SQL_CREATE_PRODUCT_TABLE="CREATE TABLE " + OrderStoreContract.OrderStoreEntry.TABLE_PRODUCT + " (" +
-            OrderStoreContract.OrderStoreEntry._ID + "INTEGER PRIMARY KEY AUTOINCREMENT, " +
-            OrderStoreContract.OrderStoreEntry.COLUMN_PRODUCT_NAME + "TEXT , " +
-            OrderStoreContract.OrderStoreEntry.COLUMN_PRICE + "INTEGER" +
+            OrderStoreContract.OrderStoreEntry._ID + " INTEGER PRIMARY KEY AUTOINCREMENT, " +
+            OrderStoreContract.OrderStoreEntry.COLUMN_PRODUCT_NAME + " TEXT , " +
+            OrderStoreContract.OrderStoreEntry.COLUMN_PRICE + " INTEGER" +
             "); ";
     //order table sql
     private static String SQL_CREATE_ORDERS_TABLE= "CREATE TABLE " + OrderStoreContract.OrderStoreEntry.TABLE_ORDERS + " (" +
-            OrderStoreContract.OrderStoreEntry._ID + "INTEGER PRIMARY KEY AUTOINCREMENT, " +
-            OrderStoreContract.OrderStoreEntry.COLUMN_PRODUCT_PRICE + "INTEGER, " +
-            OrderStoreContract.OrderStoreEntry.COLUMN_QUANTITY + "INTEGER, " +
-            OrderStoreContract.OrderStoreEntry.COLUMN_TOTAL_AMOUNT +"INTEGER" +
+            OrderStoreContract.OrderStoreEntry._ID + " INTEGER PRIMARY KEY AUTOINCREMENT, " +
+            OrderStoreContract.OrderStoreEntry.COLUMN_PRODUCT_PRICE + " INTEGER, " +
+            OrderStoreContract.OrderStoreEntry.COLUMN_QUANTITY + " INTEGER, " +
+            OrderStoreContract.OrderStoreEntry.COLUMN_TOTAL_AMOUNT +" INTEGER" +
             ") ";
-    private static String SQL_CREATE_ORDERLIST_TABLE= "CREATE TABLE" + OrderStoreContract.OrderStoreEntry.TABLE_ORDERLIST + " (" +
-            OrderStoreContract.OrderStoreEntry._ID + "INTEGER PRIMARY KEY AUTOINCREMENT, " +
-            OrderStoreContract.OrderStoreEntry.COLUMN_CUSTOMER_ID + "INTEGER, " +
-            OrderStoreContract.OrderStoreEntry.COLUMN_PRODUCT_ID + "INTEGER, " +
-            OrderStoreContract.OrderStoreEntry.COLUMN_ORDER_ID + "INTEGER" +
+   /* private static String SQL_CREATE_ORDERLIST_TABLE= "CREATE TABLE" + OrderStoreContract.OrderStoreEntry.TABLE_ORDERLIST + " (" +
+            OrderStoreContract.OrderStoreEntry._ID + " INTEGER PRIMARY KEY AUTOINCREMENT, " +
+            OrderStoreContract.OrderStoreEntry.COLUMN_CUSTOMER_ID + " INTEGER, " +
+            OrderStoreContract.OrderStoreEntry.COLUMN_PRODUCT_ID + " INTEGER, " +
+            OrderStoreContract.OrderStoreEntry.COLUMN_ORDER_ID + " INTEGER" +
             ") ";
-
+*/
 
     @Override
     public void onCreate(SQLiteDatabase sqLiteDatabase){
@@ -80,7 +80,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         sqLiteDatabase.execSQL(SQL_CREATE_CUSTOMER_TABLE);
         sqLiteDatabase.execSQL(SQL_CREATE_PRODUCT_TABLE);
         sqLiteDatabase.execSQL(SQL_CREATE_ORDERS_TABLE);
-        sqLiteDatabase.execSQL(SQL_CREATE_ORDERLIST_TABLE);
+     //   sqLiteDatabase.execSQL(SQL_CREATE_ORDERLIST_TABLE);
     }
 
     @Override
@@ -98,7 +98,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     /*CRUD operations
       create rows
          Customer table */
-    public long createCustomer(Customers customer, int orderLinesId){
+    public long createCustomer(Customers customer){
         SQLiteDatabase db= this.getWritableDatabase();
 
         ContentValues values= new ContentValues();
