@@ -17,7 +17,7 @@
             </intent-filter>
         </activity>
         <provider
-            android:authorities="com.example.sasalog.orderstore.orderprovider"
+            android:authorities="com.example.orderstore.orderprovider"
             android:name=".OrderProvider"
             android:exported="true" />
     </application>

@@ -16,6 +16,7 @@ public class OrderStoreContract {
         public static final String COLUMN_FIRST_NAME="firstName";
         public static final String COLUMN_LAST_NAME= "lastName";
         public static final String COLUMN_TELEPHONE= "telephone";
+        public  static final String[] ALL_CUSTOMERS= {BaseColumns._ID, COLUMN_FIRST_NAME, COLUMN_LAST_NAME, COLUMN_TELEPHONE};
 
         //product Table -column names
         public static final String COLUMN_PRODUCT_NAME="productName";
