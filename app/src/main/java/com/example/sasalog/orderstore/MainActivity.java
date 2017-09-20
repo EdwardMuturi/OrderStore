@@ -1,12 +1,19 @@
 package com.example.sasalog.orderstore;
 
+import android.annotation.TargetApi;
 import android.content.ContentValues;
+import android.database.Cursor;
 import android.net.Uri;
+import android.os.Build;
+import android.support.v4.widget.CursorAdapter;
+import android.support.v4.widget.ListViewAutoScrollHelper;
+import android.support.v4.widget.SimpleCursorAdapter;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
+import android.widget.ListView;
 
 import com.example.sasalog.orderstore.myData.DatabaseHelper;
 import com.example.sasalog.orderstore.myData.OrderStoreContract;
@@ -15,31 +22,24 @@ import java.util.List;
 
 public class MainActivity extends AppCompatActivity {
 
-    private static final int NUM_LIST_ITEMS= 100;
-
-    private CustomerAdapter mAdapter;
-    private RecyclerView customerList;
 
    // DatabaseHelper db;
 
+    @TargetApi(Build.VERSION_CODES.JELLY_BEAN)
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        customerList= (RecyclerView) findViewById(R.id.customer_recycler);
-
-        LinearLayoutManager layoutManager= new LinearLayoutManager(this);
-
-        customerList.setLayoutManager(layoutManager);
-        customerList.setHasFixedSize(true);
-
-        mAdapter= new CustomerAdapter(NUM_LIST_ITEMS);
-
-        customerList.setAdapter(mAdapter);
-
         insertCustomer("New Customer");
 
+        Cursor cursor= getContentResolver().query(OrderProvider.CONTENT_URI, OrderStoreContract.OrderStoreEntry.ALL_CUSTOMERS, null, null, null, null);
+        String [] from= {OrderStoreContract.OrderStoreEntry.COLUMN_FIRST_NAME};
+        int [] to= {android.R.id.text1};
+        CursorAdapter cursorAdapter= new SimpleCursorAdapter(this, android.R.layout.simple_list_item_1, cursor, from, to, 0);
+
+        ListView list= (ListView) findViewById(android.R.id.list);
+        list.setAdapter(cursorAdapter);
 
         /*db= new DatabaseHelper(getApplicationContext());
         Customers cust1= new Customers( );

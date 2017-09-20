@@ -47,7 +47,7 @@ public class OrderProvider extends ContentProvider {
     public Cursor query(@NonNull Uri uri, @Nullable String[] strings, @Nullable String s, @Nullable String[] strings1, @Nullable String s1) {
         return database.query(OrderStoreContract.OrderStoreEntry.TABLE_CUSTOMER, OrderStoreContract.OrderStoreEntry.ALL_CUSTOMERS,
                 s, null, null, null,
-                BaseColumns._ID + "DESC");
+                BaseColumns._ID + " DESC");
     }
 
     @Nullable
