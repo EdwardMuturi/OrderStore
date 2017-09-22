@@ -1,3 +1,6 @@
 <resources>
     <string name="app_name">OrderStore</string>
+    <string name="add_new_customer">Add new Customer</string>
+    <string name="delete_all_customers">Delete all Customers</string>
+    <string name="are_you_sure">Are you Sure?</string>
 </resources>
