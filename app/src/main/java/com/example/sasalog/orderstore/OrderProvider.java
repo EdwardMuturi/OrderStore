@@ -11,7 +11,13 @@ import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 
 import com.example.sasalog.orderstore.myData.DatabaseHelper;
+import com.example.sasalog.orderstore.myData.OrderProviderContract;
 import com.example.sasalog.orderstore.myData.OrderStoreContract;
+
+import static com.example.sasalog.orderstore.myData.OrderProviderContract.AUTHORITY;
+import static com.example.sasalog.orderstore.myData.OrderProviderContract.BASE_PATH;
+import static com.example.sasalog.orderstore.myData.OrderProviderContract.CUSTOMER;
+import static com.example.sasalog.orderstore.myData.OrderProviderContract.CUSTOMER_ID;
 
 /**
  * Created by sasalog on 9/18/17.
@@ -19,19 +25,15 @@ import com.example.sasalog.orderstore.myData.OrderStoreContract;
 
 public class OrderProvider extends ContentProvider {
 
-    private static final String AUTHORITY = "com.example.orderstore.orderprovider";
-    private static final String BASE_PATH = OrderStoreContract.OrderStoreEntry.TABLE_CUSTOMER;
-    public static final Uri CONTENT_URI = Uri.parse("content://" + AUTHORITY + "/" + BASE_PATH );
 
-    // Constant to identify the requested operation
-    private static final int NOTES = 1;
-    private static final int NOTES_ID = 2;
+
+
 
     private static final UriMatcher uriMatcher= new UriMatcher(UriMatcher.NO_MATCH);
 
     static {
-        uriMatcher.addURI(AUTHORITY, BASE_PATH, NOTES);
-        uriMatcher.addURI(AUTHORITY,BASE_PATH + "/#", NOTES_ID);
+        uriMatcher.addURI(AUTHORITY, BASE_PATH, CUSTOMER);
+        uriMatcher.addURI(AUTHORITY,BASE_PATH + "/#", CUSTOMER_ID);
     }
 
     private SQLiteDatabase database;
@@ -44,9 +46,13 @@ public class OrderProvider extends ContentProvider {
 
     @Nullable
     @Override
-    public Cursor query(@NonNull Uri uri, @Nullable String[] strings, @Nullable String s, @Nullable String[] strings1, @Nullable String s1) {
+    public Cursor query(@NonNull Uri uri, @Nullable String[] projection, @Nullable String selection, @Nullable String[]
+            selectionArgs, @Nullable String sortOrder) {
+        if(uriMatcher.match(uri)== CUSTOMER_ID){
+            selection= BaseColumns._ID +"=" + uri.getLastPathSegment();
+        }
         return database.query(OrderStoreContract.OrderStoreEntry.TABLE_CUSTOMER, OrderStoreContract.OrderStoreEntry.ALL_CUSTOMERS,
-                s, null, null, null,
+                selection, null, null, null,
                 BaseColumns._ID + " DESC");
     }
 
@@ -59,6 +65,7 @@ public class OrderProvider extends ContentProvider {
     @Nullable
     @Override
     public Uri insert(@NonNull Uri uri, @Nullable ContentValues contentValues) {
+
         long id =database.insert(OrderStoreContract.OrderStoreEntry.TABLE_CUSTOMER, null, contentValues );
         return Uri.parse(BASE_PATH + "/" + id);
     }

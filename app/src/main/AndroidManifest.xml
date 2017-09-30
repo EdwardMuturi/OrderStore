@@ -19,7 +19,9 @@
         <provider
             android:authorities="com.example.orderstore.orderprovider"
             android:name=".OrderProvider"
-            android:exported="true" />
+            android:readPermission="com.example.orderstore.orderprovider.READ"
+            android:exported="true"
+            android:enabled="true" />
     </application>
 
 </manifest>

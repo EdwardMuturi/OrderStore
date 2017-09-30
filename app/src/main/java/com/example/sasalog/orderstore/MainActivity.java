@@ -16,9 +16,12 @@ import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.AdapterView;
 import android.widget.ListView;
 import android.widget.Toast;
 
+import com.example.sasalog.orderstore.myData.OrderProviderContract;
 import com.example.sasalog.orderstore.myData.OrderStoreContract;
 
 public class MainActivity extends AppCompatActivity implements LoaderManager.LoaderCallbacks<Cursor>{
@@ -45,7 +48,7 @@ public class MainActivity extends AppCompatActivity implements LoaderManager.Loa
     private void insertCustomer(String customerFName) {
         ContentValues values= new ContentValues();
         values.put(OrderStoreContract.OrderStoreEntry.COLUMN_FIRST_NAME, customerFName);
-        Uri customerUri= getContentResolver().insert(OrderProvider.CONTENT_URI, values);
+        Uri customerUri= getContentResolver().insert(OrderProviderContract.CONTENT_URI, values);
 
         Log.d("MainActivity", "Added Customer" + customerUri.getLastPathSegment());
     }
@@ -81,7 +84,7 @@ public class MainActivity extends AppCompatActivity implements LoaderManager.Loa
                     public void onClick(DialogInterface dialog, int button) {
                         if (button == DialogInterface.BUTTON_POSITIVE) {
                             //Insert Data management code here
-                            getContentResolver().delete(OrderProvider.CONTENT_URI, null, null);
+                            getContentResolver().delete(OrderProviderContract.CONTENT_URI, null, null);
                             restartLoader();
                             Toast.makeText(MainActivity.this,
                                     getString(R.string.delete_all_customers),
@@ -112,7 +115,7 @@ public class MainActivity extends AppCompatActivity implements LoaderManager.Loa
 
     @Override
     public Loader<Cursor> onCreateLoader(int id, Bundle args) {
-        return new CursorLoader(this, OrderProvider.CONTENT_URI, null, null, null, null);
+        return new CursorLoader(this, OrderProviderContract.CONTENT_URI, null, null, null, null);
     }
 
     @Override
