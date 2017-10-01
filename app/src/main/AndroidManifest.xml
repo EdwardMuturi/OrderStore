@@ -16,12 +16,23 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+
         <provider
-            android:authorities="com.example.orderstore.orderprovider"
             android:name=".OrderProvider"
-            android:readPermission="com.example.orderstore.orderprovider.READ"
+            android:authorities="com.example.orderstore.orderprovider"
+            android:enabled="true"
             android:exported="true"
-            android:enabled="true" />
+            android:readPermission="com.example.orderstore.orderprovider.READ" />
+
+        <activity
+            android:name=".EditorActivity"
+            android:label="@string/title_activity_editor"
+            android:parentActivityName=".MainActivity"
+            android:theme="@style/AppTheme.NoActionBar">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.example.sasalog.orderstore.MainActivity" />
+        </activity>
     </application>
 
 </manifest>

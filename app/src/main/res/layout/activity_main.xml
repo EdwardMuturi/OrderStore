@@ -11,5 +11,24 @@
         android:layout_height="match_parent"
         android:id="@+id/android:list"
         />
+    <at.markushi.ui.CircleButton
+        android:layout_width="64dp"
+        android:layout_height="64dp"
+        app:cb_color="@color/colorPrimary"
+        app:cb_pressedRingWidth="8dp"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentEnd="true"
+        android:onClick="openEditorForNewNote"
+        android:src="@drawable/ic_action_add"/>
+    <!--<Button-->
+        <!--android:layout_width="wrap_content"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--android:text="New Note"-->
+        <!--android:id="@+id/btn_new_note"-->
+        <!--android:layout_alignParentBottom="true"-->
+        <!--android:layout_alignParentRight="true"-->
+        <!--android:layout_alignParentEnd="true"-->
+        <!--android:onClick="openEditorForNewNote"/>-->
 
 </RelativeLayout>

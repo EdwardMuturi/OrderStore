@@ -11,7 +11,6 @@ import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 
 import com.example.sasalog.orderstore.myData.DatabaseHelper;
-import com.example.sasalog.orderstore.myData.OrderProviderContract;
 import com.example.sasalog.orderstore.myData.OrderStoreContract;
 
 import static com.example.sasalog.orderstore.myData.OrderProviderContract.AUTHORITY;
@@ -24,10 +23,6 @@ import static com.example.sasalog.orderstore.myData.OrderProviderContract.CUSTOM
  */
 
 public class OrderProvider extends ContentProvider {
-
-
-
-
 
     private static final UriMatcher uriMatcher= new UriMatcher(UriMatcher.NO_MATCH);
 

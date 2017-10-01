@@ -1,9 +1,12 @@
 package com.example.sasalog.orderstore;
 
+import android.annotation.TargetApi;
 import android.content.ContentValues;
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.database.Cursor;
 import android.net.Uri;
+import android.os.Build;
 import android.os.Bundle;
 import android.support.v4.app.LoaderManager;
 import android.support.v4.content.CursorLoader;
@@ -12,6 +15,7 @@ import android.support.v4.widget.CursorAdapter;
 import android.support.v4.widget.SimpleCursorAdapter;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
+import android.text.InputType;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -26,7 +30,8 @@ import com.example.sasalog.orderstore.myData.OrderStoreContract;
 
 public class MainActivity extends AppCompatActivity implements LoaderManager.LoaderCallbacks<Cursor>{
 
-   // DatabaseHelper db;
+    private static final int EDITOR_REQUEST_CODE = 1001;
+    // DatabaseHelper db;
    private CursorAdapter cursorAdapter;
 
     @Override
@@ -40,6 +45,16 @@ public class MainActivity extends AppCompatActivity implements LoaderManager.Loa
 
         ListView list= (ListView) findViewById(android.R.id.list);
         list.setAdapter(cursorAdapter);
+
+        list.setOnItemClickListener(new AdapterView.OnItemClickListener(){
+            @Override
+            public  void onItemClick(AdapterView<?> parent, View view, int position, long id){
+                Intent intent= new Intent(MainActivity.this, EditorActivity.class);
+                Uri uri= Uri.parse(OrderProviderContract.CONTENT_URI + "/" + id);
+                intent.putExtra(OrderProviderContract.CONTENT_ITEM_TYPE, uri);
+                startActivityForResult(intent, EDITOR_REQUEST_CODE);
+            }
+        });
 
         getSupportLoaderManager().initLoader(0, null,this);
 
@@ -126,5 +141,18 @@ public class MainActivity extends AppCompatActivity implements LoaderManager.Loa
     @Override
     public void onLoaderReset(Loader<Cursor> loader) {
         cursorAdapter.swapCursor(null);
+    }
+
+    //function invoked on click of new note btn and starts editor activity
+    public void openEditorForNewNote(View view) {
+        Intent intent= new Intent(this, EditorActivity.class);
+        startActivityForResult(intent, EDITOR_REQUEST_CODE);
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data){
+        if(requestCode == EDITOR_REQUEST_CODE && resultCode == RESULT_OK){
+            restartLoader();
+        }
     }
 }
