@@ -67,9 +67,19 @@ public class EditorActivity extends AppCompatActivity {
             case android.R.id.home:
                 finishEditing();
                 break;
+            case R.id.action_delete:
+                deleteCustomer();
         }
 
         return true;
+    }
+
+    private void deleteCustomer() {
+        getContentResolver().delete(OrderProviderContract.CONTENT_URI, customerFilter, null);
+        Toast.makeText(this, R.string.customer_deleted, Toast.LENGTH_SHORT).show();
+
+        setResult(RESULT_OK);
+        finish();// return to main activity
     }
 
     private void finishEditing() {
@@ -85,7 +95,7 @@ public class EditorActivity extends AppCompatActivity {
                 break;
             case Intent.ACTION_EDIT:
                 if(newText.length()== 0){
-                    //deletCustomer();
+                    deleteCustomer();
                 } else if(oldText.equals(newText)){
                     setResult(RESULT_CANCELED);
                 } else {

@@ -8,4 +8,5 @@
     <string name="add_new_customer_hint">Enter Customer first name, and press back button</string>
     <string name="customer_updated_Toast">Customer Updated</string>
     <string name="action_delete_customer">Delete Customer</string>
+    <string name="customer_deleted">Customer Entry Deleted</string>
 </resources>
