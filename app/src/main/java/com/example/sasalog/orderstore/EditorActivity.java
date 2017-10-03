@@ -31,6 +31,9 @@ public class EditorActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_editor);
 
+        Toolbar toolbar = (Toolbar) findViewById(R.id.mytoolbar);
+        setSupportActionBar(toolbar);;
+
         editor= (EditText) findViewById(R.id.edit_text);
 
         Intent intent= getIntent();
@@ -49,6 +52,8 @@ public class EditorActivity extends AppCompatActivity {
             editor.setText(oldText);
             editor.requestFocus();
         }
+
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
     }
 

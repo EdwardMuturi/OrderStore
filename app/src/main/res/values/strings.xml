@@ -5,8 +5,10 @@
     <string name="are_you_sure">Are you Sure?</string>
     <string name="title_activity_editor">EditorActivity</string>
     <string name="new_customer">New Customer</string>
-    <string name="add_new_customer_hint">Enter Customer first name, and press back button</string>
+    <string name="add_new_customer_hint">Enter Customer first name, and press back button to add to list, delete the text and press back
+    to remove from list</string>
     <string name="customer_updated_Toast">Customer Updated</string>
     <string name="action_delete_customer">Delete Customer</string>
     <string name="customer_deleted">Customer Entry Deleted</string>
+    <string name="title_activity_editor0">editor0</string>
 </resources>

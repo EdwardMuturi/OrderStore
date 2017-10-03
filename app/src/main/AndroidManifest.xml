@@ -33,6 +33,15 @@
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="com.example.sasalog.orderstore.MainActivity" />
         </activity>
+        <activity
+            android:name=".editor0"
+            android:label="@string/title_activity_editor0"
+            android:parentActivityName=".MainActivity"
+            android:theme="@style/AppTheme.NoActionBar">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.example.sasalog.orderstore.MainActivity" />
+        </activity>
     </application>
 
 </manifest>
