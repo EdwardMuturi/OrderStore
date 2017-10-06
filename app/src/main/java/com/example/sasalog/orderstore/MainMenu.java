@@ -26,12 +26,12 @@ public class MainMenu extends AppCompatActivity {
     }
 
     public void openOrders(View view){
-        Intent intent= new Intent(this, Orders.class);
+        Intent intent= new Intent(this, OrdersActivity.class);
         startActivity(intent);
     }
 
     public void openOrderList(View view){
-        Intent intent= new Intent(this, OrderLines.class);
+        Intent intent= new Intent(this, OrderLinesActivity.class);
         startActivity(intent);
     }
 

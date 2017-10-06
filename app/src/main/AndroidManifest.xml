@@ -9,14 +9,13 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".MainActivity">
-            <!--<intent-filter>-->
-                <!--<action android:name="android.intent.action.MAIN" />-->
-
-                <!--<category android:name="android.intent.category.LAUNCHER" />-->
-            <!--</intent-filter>-->
+        <activity
+            android:name=".MainActivity"
+            android:parentActivityName=".MainMenu">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.example.sasalog.orderstore.MainMenu"/>
         </activity>
-
         <activity
             android:name=".EditorActivity"
             android:label="@string/title_activity_editor"
@@ -26,9 +25,7 @@
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="com.example.sasalog.orderstore.MainActivity" />
         </activity>
-
         <activity android:name=".ProductActivity" />
-
         <activity android:name=".MainMenu">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -44,6 +41,8 @@
             android:exported="true"
             android:readPermission="com.example.orderstore.orderprovider.READ" />
 
+        <activity android:name=".OrderLinesActivity" />
+        <activity android:name=".OrdersActivity"></activity>
     </application>
 
 </manifest>

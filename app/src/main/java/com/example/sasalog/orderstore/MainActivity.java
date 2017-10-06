@@ -40,6 +40,7 @@ public class MainActivity extends AppCompatActivity implements LoaderManager.Loa
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        setTitle("Customers");
 
         String [] from= {OrderStoreContract.OrderStoreEntry.COLUMN_FIRST_NAME};
         int [] to= {android.R.id.text1};

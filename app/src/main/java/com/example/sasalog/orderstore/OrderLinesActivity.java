@@ -3,12 +3,12 @@ package com.example.sasalog.orderstore;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 
-public class ProductActivity extends AppCompatActivity {
+public class OrderLinesActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_product);
-        setTitle("Products");
+        setContentView(R.layout.activity_order_lines);
+        setTitle("Order Lines");
     }
 }
