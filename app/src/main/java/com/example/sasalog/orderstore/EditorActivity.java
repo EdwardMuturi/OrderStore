@@ -80,7 +80,7 @@ public class EditorActivity extends AppCompatActivity {
     }
 
     private void deleteCustomer() {
-        getContentResolver().delete(OrderProviderContract.CONTENT_URI, customerFilter, null);
+        getContentResolver().delete(OrderProviderContract.CUSTOMER_CONTENT_URI, customerFilter, null);
         Toast.makeText(this, R.string.customer_deleted, Toast.LENGTH_SHORT).show();
 
         setResult(RESULT_OK);
@@ -113,7 +113,7 @@ public class EditorActivity extends AppCompatActivity {
     private void updateCustomer(String customerFName) {
         ContentValues values= new ContentValues();
         values.put(OrderStoreContract.OrderStoreEntry.COLUMN_FIRST_NAME, customerFName);
-        getContentResolver().update(OrderProviderContract.CONTENT_URI, values, customerFilter, null);
+        getContentResolver().update(OrderProviderContract.CUSTOMER_CONTENT_URI, values, customerFilter, null);
 
         Toast.makeText(this, R.string.customer_updated_Toast, Toast.LENGTH_SHORT).show();
         setResult(RESULT_OK);
@@ -122,7 +122,7 @@ public class EditorActivity extends AppCompatActivity {
     private void insertCustomer(String customerFName) {
         ContentValues values= new ContentValues();
         values.put(OrderStoreContract.OrderStoreEntry.COLUMN_FIRST_NAME, customerFName);
-        getContentResolver().insert(OrderProviderContract.CONTENT_URI, values);
+        getContentResolver().insert(OrderProviderContract.CUSTOMER_CONTENT_URI, values);
         setResult(RESULT_OK);
     }
 

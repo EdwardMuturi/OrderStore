@@ -10,6 +10,26 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
         <activity android:name=".MainActivity">
+            <!--<intent-filter>-->
+                <!--<action android:name="android.intent.action.MAIN" />-->
+
+                <!--<category android:name="android.intent.category.LAUNCHER" />-->
+            <!--</intent-filter>-->
+        </activity>
+
+        <activity
+            android:name=".EditorActivity"
+            android:label="@string/title_activity_editor"
+            android:parentActivityName=".MainActivity"
+            android:theme="@style/AppTheme.NoActionBar">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.example.sasalog.orderstore.MainActivity" />
+        </activity>
+
+        <activity android:name=".ProductActivity" />
+
+        <activity android:name=".MainMenu">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -24,15 +44,6 @@
             android:exported="true"
             android:readPermission="com.example.orderstore.orderprovider.READ" />
 
-        <activity
-            android:name=".EditorActivity"
-            android:label="@string/title_activity_editor"
-            android:parentActivityName=".MainActivity"
-            android:theme="@style/AppTheme.NoActionBar">
-            <meta-data
-                android:name="android.support.PARENT_ACTIVITY"
-                android:value="com.example.sasalog.orderstore.MainActivity" />
-        </activity>
     </application>
 
 </manifest>

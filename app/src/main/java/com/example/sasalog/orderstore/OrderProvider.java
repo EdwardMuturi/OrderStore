@@ -14,7 +14,7 @@ import com.example.sasalog.orderstore.myData.DatabaseHelper;
 import com.example.sasalog.orderstore.myData.OrderStoreContract;
 
 import static com.example.sasalog.orderstore.myData.OrderProviderContract.AUTHORITY;
-import static com.example.sasalog.orderstore.myData.OrderProviderContract.BASE_PATH;
+import static com.example.sasalog.orderstore.myData.OrderProviderContract.CUSTOMER_BASE_PATH;
 import static com.example.sasalog.orderstore.myData.OrderProviderContract.CUSTOMER;
 import static com.example.sasalog.orderstore.myData.OrderProviderContract.CUSTOMER_ID;
 
@@ -27,8 +27,8 @@ public class OrderProvider extends ContentProvider {
     private static final UriMatcher uriMatcher= new UriMatcher(UriMatcher.NO_MATCH);
 
     static {
-        uriMatcher.addURI(AUTHORITY, BASE_PATH, CUSTOMER);
-        uriMatcher.addURI(AUTHORITY,BASE_PATH + "/#", CUSTOMER_ID);
+        uriMatcher.addURI(AUTHORITY, CUSTOMER_BASE_PATH, CUSTOMER);
+        uriMatcher.addURI(AUTHORITY, CUSTOMER_BASE_PATH + "/#", CUSTOMER_ID);
     }
 
     private SQLiteDatabase database;
@@ -62,7 +62,7 @@ public class OrderProvider extends ContentProvider {
     public Uri insert(@NonNull Uri uri, @Nullable ContentValues contentValues) {
 
         long id =database.insert(OrderStoreContract.OrderStoreEntry.TABLE_CUSTOMER, null, contentValues );
-        return Uri.parse(BASE_PATH + "/" + id);
+        return Uri.parse(CUSTOMER_BASE_PATH + "/" + id);
     }
 
     @Override

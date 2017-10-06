@@ -28,9 +28,11 @@ import android.widget.Toast;
 import com.example.sasalog.orderstore.myData.OrderProviderContract;
 import com.example.sasalog.orderstore.myData.OrderStoreContract;
 
+import static com.example.sasalog.orderstore.myData.OrderProviderContract.EDITOR_REQUEST_CODE;
+
 public class MainActivity extends AppCompatActivity implements LoaderManager.LoaderCallbacks<Cursor>{
 
-    private static final int EDITOR_REQUEST_CODE = 1001;
+
     // DatabaseHelper db;
    private CursorAdapter cursorAdapter;
 
@@ -50,7 +52,7 @@ public class MainActivity extends AppCompatActivity implements LoaderManager.Loa
             @Override
             public  void onItemClick(AdapterView<?> parent, View view, int position, long id){
                 Intent intent= new Intent(MainActivity.this, EditorActivity.class);
-                Uri uri= Uri.parse(OrderProviderContract.CONTENT_URI + "/" + id);
+                Uri uri= Uri.parse(OrderProviderContract.CUSTOMER_CONTENT_URI + "/" + id);
                 intent.putExtra(OrderProviderContract.CONTENT_ITEM_TYPE, uri);
                 startActivityForResult(intent, EDITOR_REQUEST_CODE);
             }
@@ -63,7 +65,7 @@ public class MainActivity extends AppCompatActivity implements LoaderManager.Loa
     private void insertCustomer(String customerFName) {
         ContentValues values= new ContentValues();
         values.put(OrderStoreContract.OrderStoreEntry.COLUMN_FIRST_NAME, customerFName);
-        Uri customerUri= getContentResolver().insert(OrderProviderContract.CONTENT_URI, values);
+        Uri customerUri= getContentResolver().insert(OrderProviderContract.CUSTOMER_CONTENT_URI, values);
 
         Log.d("MainActivity", "Added Customer" + customerUri.getLastPathSegment());
     }
@@ -99,7 +101,7 @@ public class MainActivity extends AppCompatActivity implements LoaderManager.Loa
                     public void onClick(DialogInterface dialog, int button) {
                         if (button == DialogInterface.BUTTON_POSITIVE) {
                             //Insert Data management code here
-                            getContentResolver().delete(OrderProviderContract.CONTENT_URI, null, null);
+                            getContentResolver().delete(OrderProviderContract.CUSTOMER_CONTENT_URI, null, null);
                             restartLoader();
                             Toast.makeText(MainActivity.this,
                                     getString(R.string.delete_all_customers),
@@ -130,7 +132,7 @@ public class MainActivity extends AppCompatActivity implements LoaderManager.Loa
 
     @Override
     public Loader<Cursor> onCreateLoader(int id, Bundle args) {
-        return new CursorLoader(this, OrderProviderContract.CONTENT_URI, null, null, null, null);
+        return new CursorLoader(this, OrderProviderContract.CUSTOMER_CONTENT_URI, null, null, null, null);
     }
 
     @Override
