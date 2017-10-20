@@ -25,7 +25,12 @@
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="com.example.sasalog.orderstore.MainActivity" />
         </activity>
-        <activity android:name=".ProductActivity" />
+        <activity android:name=".ProductActivity" >
+            android:parentActivityName=".MainMenu">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.example.sasalog.orderstore.MainMenu"/>
+        </activity>
         <activity android:name=".MainMenu">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -41,8 +46,18 @@
             android:exported="true"
             android:readPermission="com.example.orderstore.orderprovider.READ" />
 
-        <activity android:name=".OrderLinesActivity" />
-        <activity android:name=".OrdersActivity"></activity>
+        <activity android:name=".OrderLinesActivity">
+            android:parentActivityName=".MainMenu">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.example.sasalog.orderstore.MainMenu"/>
+        </activity>
+        <activity android:name=".OrdersActivity">
+            android:parentActivityName=".MainMenu">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.example.sasalog.orderstore.MainMenu"/>
+        </activity>
     </application>
 
 </manifest>

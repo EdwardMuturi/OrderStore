@@ -21,16 +21,19 @@ public class OrderStoreContract {
         //product Table -column names
         public static final String COLUMN_PRODUCT_NAME="productName";
         public static final String COLUMN_PRICE= "price";
+        public static  final String[] ALL_PRODUCTS= {_ID, COLUMN_PRODUCT_NAME, COLUMN_PRICE};
 
         //Orders Table - column names
         public static final String COLUMN_QUANTITY= "quantity";
         public static final String COLUMN_PRODUCT_PRICE= "price";
         public static final String COLUMN_TOTAL_AMOUNT= "totalAmount";
+        public static final String[] ALL_ORDERS= {_ID, COLUMN_QUANTITY, COLUMN_PRODUCT_PRICE, COLUMN_TOTAL_AMOUNT};
 
         //Order Lines Table - column names
         public static final String COLUMN_CUSTOMER_ID="customerId";
         public static final String COLUMN_ORDER_ID= "orderId";
         public static final String COLUMN_PRODUCT_ID= "productId";
+        public static final String[] ALL_ORDER_LINES= {_ID, COLUMN_CUSTOMER_ID, COLUMN_ORDER_ID, COLUMN_PRODUCT_ID};
 
     }
 }

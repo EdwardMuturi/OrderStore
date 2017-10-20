@@ -16,6 +16,12 @@ public class OrderProviderContract {
     public static  final String PRODUCT_BASE_PATH= OrderStoreContract.OrderStoreEntry.TABLE_PRODUCT;
     public static final Uri PRODUCT_CONTENT_URI= Uri.parse("content://" + AUTHORITY+ "/"+ PRODUCT_BASE_PATH);
 
+    public  static final String ORDER_BASE_PATH= OrderStoreContract.OrderStoreEntry.TABLE_ORDERS;
+    public static final Uri ORDER_CONTENT_URI= Uri.parse("content://" + AUTHORITY + "/" + ORDER_BASE_PATH);
+
+    public  static final String ORDER_LIST_BASE_PATH= OrderStoreContract.OrderStoreEntry.TABLE_ORDERLIST;
+    public static final Uri ORDER_LIST_CONTENT_URI= Uri.parse("content://" + AUTHORITY + "/" + ORDER_LIST_BASE_PATH);
+
 
     // Constant to identify the requested operation
     public static final int CUSTOMER = 1;
@@ -24,8 +30,13 @@ public class OrderProviderContract {
     public static final int PRODUCT= 3;
     public static final int PRODUCT_ID= 4;
 
+    public static final int ORDER= 5;
+    public static final int ORDER_ID= 6;
+
     public static final String CONTENT_ITEM_TYPE="Customer";
     public static final String PRODUCT_CONTENT_ITEM_TYPE="Product";
+    public static final String ORDER_ITEM_TYPE="Order";
+    public static final String ORDER_LIST_TYPE="Order List";
 
     public static final int EDITOR_REQUEST_CODE = 1001;
 }
