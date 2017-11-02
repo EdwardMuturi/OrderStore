@@ -12,9 +12,17 @@
         android:id="@+id/txt_edit_order" />
     <Button
         android:layout_width="match_parent"
-        android:layout_height="90dp"
+        android:layout_height="70dp"
         android:layout_below="@id/txt_edit_order"
+        android:id="@+id/btn_add_order"
         android:text="@string/add_order"
         android:onClick="addOrder"/>
+    <Button
+        android:layout_width="match_parent"
+        android:layout_height="70dp"
+        android:layout_below="@id/btn_add_order"
+        android:onClick="orderUpdate"
+        android:text="@string/update_order"
+        android:layout_marginTop="10sp"/>
 
 </RelativeLayout>

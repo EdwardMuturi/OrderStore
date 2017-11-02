@@ -14,6 +14,7 @@ import android.support.v4.widget.SimpleCursorAdapter;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
+import android.widget.AdapterView;
 import android.widget.ListView;
 
 import com.example.sasalog.orderstore.myData.OrderProviderContract;
@@ -39,6 +40,18 @@ public class OrdersActivity extends AppCompatActivity implements LoaderManager.L
 
         ListView ordersList = (ListView) findViewById(R.id.orders_list);
         ordersList.setAdapter(cursorAdapter);
+
+        ordersList.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            //parent, view, position, id -> easy order names of below parameters
+            public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
+                Intent intent= new Intent(OrdersActivity.this, OrderEditorActivity.class);
+                Uri uri= Uri.parse(OrderProviderContract.ORDER_CONTENT_URI + "/" + l);
+                intent.putExtra(OrderProviderContract.ORDER_ITEM_TYPE, uri);
+                startActivityForResult(intent, EDITOR_REQUEST_CODE);
+
+            }
+        });
 
         getLoaderManager().initLoader(0, null,this);
     }

@@ -17,4 +17,7 @@
     <string name="add_product">Add Product</string>
     <string name="add_order">Add Order</string>
     <string name="add_new_order">New Order</string>
+    <string name="update_order">Update Order</string>
+    <string name="order_added_text">Order Added</string>
+    <string name="order_updated_text">Order Updated</string>
 </resources>
