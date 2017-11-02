@@ -11,4 +11,10 @@
     <string name="action_delete_customer">Delete Customer</string>
     <string name="customer_deleted">Customer Entry Deleted</string>
     <string name="title_activity_editor0">editor0</string>
+    <string name="title_activity_edit_product">EditProductActivity</string>
+    <string name="new_product">New Product</string>
+    <string name="delete_all_products">Delete all products</string>
+    <string name="add_product">Add Product</string>
+    <string name="add_order">Add Order</string>
+    <string name="add_new_order">New Order</string>
 </resources>

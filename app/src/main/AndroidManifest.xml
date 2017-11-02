@@ -14,7 +14,7 @@
             android:parentActivityName=".MainMenu">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
-                android:value="com.example.sasalog.orderstore.MainMenu"/>
+                android:value="com.example.sasalog.orderstore.MainMenu" />
         </activity>
         <activity
             android:name=".EditorActivity"
@@ -25,11 +25,11 @@
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="com.example.sasalog.orderstore.MainActivity" />
         </activity>
-        <activity android:name=".ProductActivity" >
+        <activity android:name=".ProductActivity">
             android:parentActivityName=".MainMenu">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
-                android:value="com.example.sasalog.orderstore.MainMenu"/>
+                android:value="com.example.sasalog.orderstore.MainMenu" />
         </activity>
         <activity android:name=".MainMenu">
             <intent-filter>
@@ -50,13 +50,28 @@
             android:parentActivityName=".MainMenu">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
-                android:value="com.example.sasalog.orderstore.MainMenu"/>
+                android:value="com.example.sasalog.orderstore.MainMenu" />
         </activity>
         <activity android:name=".OrdersActivity">
             android:parentActivityName=".MainMenu">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
-                android:value="com.example.sasalog.orderstore.MainMenu"/>
+                android:value="com.example.sasalog.orderstore.MainMenu" />
+        </activity>
+        <activity
+            android:name=".EditProductActivity"
+            android:label="@string/title_activity_edit_product"
+            android:parentActivityName=".ProductActivity"
+            android:theme="@style/AppTheme.NoActionBar">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.example.sasalog.orderstore.ProductActivity" />
+        </activity>
+        <activity android:name=".OrderEditorActivity">
+            android:parentActivityName=".OrdersActivity"
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.example.sasalog.orderstore.OrdersActivity"/>
         </activity>
     </application>
 

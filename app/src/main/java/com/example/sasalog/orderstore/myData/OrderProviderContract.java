@@ -33,10 +33,14 @@ public class OrderProviderContract {
     public static final int ORDER= 5;
     public static final int ORDER_ID= 6;
 
+    public static final int ORDER_LIST= 7;
+    public static final int ORDER_LIST_ID= 8;
+
+// used indicate upate of an extsting note
     public static final String CONTENT_ITEM_TYPE="Customer";
     public static final String PRODUCT_CONTENT_ITEM_TYPE="Product";
     public static final String ORDER_ITEM_TYPE="Order";
     public static final String ORDER_LIST_TYPE="Order List";
 
-    public static final int EDITOR_REQUEST_CODE = 1001;
+    public static final int EDITOR_REQUEST_CODE = 1001; //use to identify the requesta after coming back from an activity
 }

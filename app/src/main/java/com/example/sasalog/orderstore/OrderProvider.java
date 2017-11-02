@@ -4,6 +4,7 @@ import android.content.ContentProvider;
 import android.content.ContentValues;
 import android.content.UriMatcher;
 import android.database.Cursor;
+import android.database.SQLException;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteQueryBuilder;
 import android.net.Uri;
@@ -22,7 +23,11 @@ import static com.example.sasalog.orderstore.myData.OrderProviderContract.CUSTOM
 import static com.example.sasalog.orderstore.myData.OrderProviderContract.CUSTOMER;
 import static com.example.sasalog.orderstore.myData.OrderProviderContract.CUSTOMER_ID;
 import static com.example.sasalog.orderstore.myData.OrderProviderContract.ORDER;
+import static com.example.sasalog.orderstore.myData.OrderProviderContract.ORDER_BASE_PATH;
 import static com.example.sasalog.orderstore.myData.OrderProviderContract.ORDER_ID;
+import static com.example.sasalog.orderstore.myData.OrderProviderContract.ORDER_LIST;
+import static com.example.sasalog.orderstore.myData.OrderProviderContract.ORDER_LIST_BASE_PATH;
+import static com.example.sasalog.orderstore.myData.OrderProviderContract.ORDER_LIST_ID;
 import static com.example.sasalog.orderstore.myData.OrderProviderContract.PRODUCT;
 import static com.example.sasalog.orderstore.myData.OrderProviderContract.PRODUCT_BASE_PATH;
 import static com.example.sasalog.orderstore.myData.OrderProviderContract.PRODUCT_ID;
@@ -38,11 +43,19 @@ public class OrderProvider extends ContentProvider {
     static {
         uriMatcher.addURI(AUTHORITY, CUSTOMER_BASE_PATH, CUSTOMER);
         uriMatcher.addURI(AUTHORITY, CUSTOMER_BASE_PATH + "/#", CUSTOMER_ID);
+
         uriMatcher.addURI(AUTHORITY, PRODUCT_BASE_PATH, PRODUCT);
-        uriMatcher.addURI(AUTHORITY, PRODUCT_BASE_PATH + "#", PRODUCT_ID);
+        uriMatcher.addURI(AUTHORITY, PRODUCT_BASE_PATH + "/#", PRODUCT_ID);
+
+        uriMatcher.addURI(AUTHORITY,ORDER_BASE_PATH, ORDER);
+        uriMatcher.addURI(AUTHORITY,ORDER_BASE_PATH + "/#", ORDER_ID);
+
+        uriMatcher.addURI(AUTHORITY,ORDER_LIST_BASE_PATH , ORDER_LIST);
+        uriMatcher.addURI(AUTHORITY,ORDER_LIST_BASE_PATH + "/#", ORDER_LIST_ID);
     }
 
     private SQLiteDatabase database;
+
     @Override
     public boolean onCreate() {
         DatabaseHelper helper= new DatabaseHelper(getContext());
@@ -50,24 +63,12 @@ public class OrderProvider extends ContentProvider {
         return true;
     }
 
-//    @Nullable
-//    @Override
-//    public Cursor query(@NonNull Uri uri, @Nullable String[] projection, @Nullable String selection, @Nullable String[]
-//            selectionArgs, @Nullable String sortOrder) {
-//        if(uriMatcher.match(uri)== CUSTOMER_ID) {
-//            selection = BaseColumns._ID + "=" + uri.getLastPathSegment();
-//        }
-//            return database.query(OrderStoreContract.OrderStoreEntry.TABLE_CUSTOMER, OrderStoreContract.OrderStoreEntry.ALL_CUSTOMERS,
-//                    selection, null, null, null,
-//                    BaseColumns._ID + " DESC");
-//
-//    }
 
     @Nullable
     @Override
     public Cursor query(@NonNull Uri uri, @Nullable String[] projection, @Nullable String selection, @Nullable String[]
             selectionArgs, @Nullable String sortOrder) {
-        Cursor myCursor = null;
+
         SQLiteQueryBuilder builder= new SQLiteQueryBuilder();
         int match =uriMatcher.match(uri);
 
@@ -95,6 +96,13 @@ public class OrderProvider extends ContentProvider {
                 builder.setTables(OrderStoreContract.OrderStoreEntry.TABLE_ORDERS);
                 builder.appendWhere(BaseColumns._ID + "= " +uri.getLastPathSegment());
                 break;
+            case ORDER_LIST:
+                builder.setTables(OrderStoreContract.OrderStoreEntry.TABLE_ORDERLIST);
+                break;
+            case ORDER_LIST_ID:
+                builder.setTables(OrderStoreContract.OrderStoreEntry.TABLE_ORDERLIST);
+                builder.appendWhere(BaseColumns._ID + "= " + uri.getLastPathSegment());
+                break;
 
             default:
                throw new IllegalArgumentException("Unsupported URI: " + uri);
@@ -114,20 +122,29 @@ public class OrderProvider extends ContentProvider {
     @Nullable
     @Override
     public Uri insert(@NonNull Uri uri, @Nullable ContentValues contentValues) {
-        Uri _uri= null;
+        if ( (uriMatcher.match(uri) != CUSTOMER) && (uriMatcher.match(uri) != PRODUCT) && (uriMatcher.match(uri) != ORDER) && (uriMatcher.match(uri) != ORDER_LIST)){
+            throw new IllegalArgumentException("Unsopported URI for insertion: " + uri);
+        }
+
         switch(uriMatcher.match(uri)){
             case CUSTOMER:
-                long id =database.insert(OrderStoreContract.OrderStoreEntry.TABLE_CUSTOMER, null, contentValues );
-               _uri= Uri.parse(CUSTOMER_BASE_PATH + "/" + id);
-                break;
+                long custId =database.insert(OrderStoreContract.OrderStoreEntry.TABLE_CUSTOMER, null, contentValues );
+                getContext().getContentResolver().notifyChange(uri, null);
+               return Uri.parse(CUSTOMER_BASE_PATH + "/" + custId);
+
             case PRODUCT:
                 long productId =database.insert(OrderStoreContract.OrderStoreEntry.TABLE_PRODUCT, null, contentValues );
-                _uri= Uri.parse(PRODUCT_BASE_PATH + "/" + productId);
+                getContext().getContentResolver().notifyChange(uri, null);
+                return Uri.parse(PRODUCT_BASE_PATH + "/" + productId);
+
+            case ORDER:
+                long orderId= database.insert(OrderStoreContract.OrderStoreEntry.TABLE_ORDERS, null, contentValues);
+                getContext().getContentResolver().notifyChange(uri, null);
+                return Uri.parse(ORDER_BASE_PATH +"/" + orderId);
+
             default:
-                Log.d("OrderProviderInsert", "Error inserting data");
-                break;
+                throw new SQLException("Failed to insert row into " + uri);
         }
-        return _uri;
 
     }
 

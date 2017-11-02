@@ -11,4 +11,17 @@
         android:layout_height="match_parent"
         android:id="@+id/product_list"/>
 
+    <android.support.design.widget.FloatingActionButton
+        android:id="@+id/add_product"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentBottom="true"
+        android:src="@drawable/ic_action_add"
+        android:layout_margin="@dimen/fab_margin"
+        android:onClick="editProduct"
+        app:backgroundTint="@color/colorPrimary"
+        />
+
 </RelativeLayout>
