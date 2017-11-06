@@ -173,6 +173,46 @@ public class OrderProvider extends ContentProvider {
 
     @Override
     public int update(@NonNull Uri uri, @Nullable ContentValues contentValues, @Nullable String s, @Nullable String[] strings) {
-        return database.update(OrderStoreContract.OrderStoreEntry.TABLE_CUSTOMER, contentValues, s, strings);
+         DatabaseHelper helper= new DatabaseHelper(getContext());
+         database= helper.getWritableDatabase();
+        int rowsUpdated= 0;
+        String foundTable= " ";
+        String whereClause= " ";
+
+        switch (uriMatcher.match(uri)){
+            case CUSTOMER:
+                foundTable= OrderStoreContract.OrderStoreEntry.TABLE_CUSTOMER;
+                whereClause= s;
+                break;
+            case CUSTOMER_ID:
+                String id= uri.getLastPathSegment();
+                foundTable= OrderStoreContract.OrderStoreEntry.TABLE_CUSTOMER;
+                whereClause= BaseColumns._ID + "=" + id;
+                if (TextUtils.isEmpty(s)){
+                    s= null;
+                } else {
+                    whereClause += " and" +s;
+                }
+                break;
+            case ORDER:
+                foundTable= OrderStoreContract.OrderStoreEntry.TABLE_ORDERS;
+                whereClause= s;
+            case ORDER_ID:
+                String orderId= uri.getLastPathSegment();
+                foundTable= OrderStoreContract.OrderStoreEntry.TABLE_ORDERS;
+                whereClause= BaseColumns._ID + "=" + orderId;
+                if (TextUtils.isEmpty(s)){
+                    s= null;
+                } else {
+                    whereClause += " and " +s;
+                }
+                break;
+
+            default:
+                throw new SQLException("Failed to UPDATE row into " + uri);
+        }
+        rowsUpdated= database.update(foundTable, contentValues, whereClause, strings);
+        getContext().getContentResolver().notifyChange(uri, null);
+        return rowsUpdated;
     }
 }
