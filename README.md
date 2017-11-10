@@ -3,9 +3,11 @@ Android Content Provider App
 
 To Do
 
-[] Create two android apps.
+    [] Create two android apps
     [] backend app - content provider
+    
          [] Create a db that has four tables with columns that you choose which must make sense.
+         
               [] Customers Table-store customer details
               [] Products Table-store product details
               [] Orders Table -store the products order summary made by a customer.
@@ -23,6 +25,6 @@ To Do
          [] Products - part for viewing saved products,editing their details,adding new products.
          [] Orders - part where a user can select products a customer wants to order,select the customer and create order.
 
-NB:
-These two applications will be in communication
-The front UI will be using the uris from the backend app to create,update,fetch details needed on the front ui.
+    NB:
+    These two applications will be in communication
+    The front UI will be using the uris from the backend app to create,update,fetch details needed on the front ui.
