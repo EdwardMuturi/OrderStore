@@ -8,7 +8,7 @@
 
     <EditText
         android:layout_width="match_parent"
-        android:layout_height="300dp"
+        android:layout_height="150dp"
         android:id="@+id/txt_edit_order" />
     <Button
         android:layout_width="match_parent"
@@ -23,6 +23,7 @@
         android:layout_below="@id/btn_add_order"
         android:onClick="orderUpdate"
         android:text="@string/update_order"
-        android:layout_marginTop="10sp"/>
+        android:layout_marginTop="10sp"
+        android:id="@+id/btn_update_order"/>
 
 </RelativeLayout>

@@ -1,13 +1,18 @@
 package com.example.sasalog.orderstore;
 
+import android.app.Notification;
 import android.content.ContentValues;
 import android.content.Intent;
 import android.database.Cursor;
 import android.net.Uri;
 import android.provider.BaseColumns;
+import android.support.v4.app.NotificationCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
+import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
@@ -20,6 +25,8 @@ public class OrderEditorActivity extends AppCompatActivity {
     private EditText editOrder;
     private String orderFilter;
     private String oldOrder;
+    private Button addButton;
+    private Button updateButton;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -47,6 +54,32 @@ public class OrderEditorActivity extends AppCompatActivity {
         }
     }
 
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        if(action.equals(Intent.ACTION_EDIT)){
+            getMenuInflater().inflate(R.menu.menu_orders, menu);
+        }
+        return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        int id= item.getItemId();
+        switch (item.getItemId()){
+            case R.id.action_delete_order:
+                deleteOrder();
+                break;
+        }
+        return true;
+    }
+
+    private void deleteOrder() {
+        getContentResolver().delete(OrderProviderContract.ORDER_CONTENT_URI, orderFilter, null);
+        Toast.makeText(this, R.string.toast_order_deleted, Toast.LENGTH_LONG).show();
+        setResult(RESULT_OK);
+        finish();
+    }
+
     private void finishEditing(){
         String newOrder= editOrder.getText().toString().trim();
 
@@ -55,16 +88,23 @@ public class OrderEditorActivity extends AppCompatActivity {
                 if(newOrder.length()== 0){
                     setResult(RESULT_CANCELED);
                 } else {
+                    updateButton= (Button) findViewById(R.id.btn_update_order);
+                    updateButton.setVisibility(View.GONE);
                     insertOrder(newOrder);
                 }
                 break;
             case Intent.ACTION_EDIT:
                 if(newOrder.length() == 0 ){
-//                    deleteOrder()
+                    deleteOrder();
                 } else if(oldOrder.equals(newOrder)) {
                     setResult(RESULT_CANCELED);
                 } else {
+                    addButton= (Button) findViewById(R.id.btn_add_order);
+                    addButton.setVisibility(View.INVISIBLE);
                     updateOrder(newOrder);
+                    Toast.makeText(this, "Update Order", Toast.LENGTH_LONG).show();
+
+
                 }
         }
         finish();
@@ -74,7 +114,6 @@ public class OrderEditorActivity extends AppCompatActivity {
         ContentValues values= new ContentValues();
         values.put(OrderStoreContract.OrderStoreEntry.COLUMN_QUANTITY, orderQuantity);
         getContentResolver().update(OrderProviderContract.ORDER_CONTENT_URI, values, orderFilter, null);
-        Toast.makeText(this, R.string.order_updated_text, Toast.LENGTH_LONG).show();
         setResult(RESULT_OK);
     }
 
@@ -83,15 +122,14 @@ public class OrderEditorActivity extends AppCompatActivity {
         values.put(OrderStoreContract.OrderStoreEntry.COLUMN_QUANTITY, orderQuantity);
         getContentResolver().insert(OrderProviderContract.ORDER_CONTENT_URI, values);
         setResult(RESULT_OK);
+        Toast.makeText(this, R.string.order_added_text, Toast.LENGTH_LONG).show();
     }
 
     public void addOrder(View view) {
         finishEditing();
-        Toast.makeText(this, R.string.order_added_text, Toast.LENGTH_LONG).show();
     }
 
     public void orderUpdate(View view) {
         finishEditing();
-        Toast.makeText(this, R.string.order_updated_text, Toast.LENGTH_LONG ).show();
     }
 }

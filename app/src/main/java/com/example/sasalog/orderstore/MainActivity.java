@@ -79,9 +79,6 @@ public class MainActivity extends AppCompatActivity implements LoaderManager.Loa
         int id= item.getItemId();
 
         switch (id){
-            case R.id.action_create_customer:
-                createCustomer();
-                break;
             case R.id.action_delete_all:
                 deleteAllCustomers();
                 break;
@@ -113,14 +110,6 @@ public class MainActivity extends AppCompatActivity implements LoaderManager.Loa
                 .setNegativeButton(getString(android.R.string.no), dialogClickListener)
                 .show();
 
-    }
-
-    private void createCustomer() {
-        insertCustomer("Roy");
-        insertCustomer("Multi-line\n note");
-        insertCustomer("Very long note with a lot of text that exceed the width of the screen");
-
-        restartLoader();
     }
 
     private void restartLoader() {

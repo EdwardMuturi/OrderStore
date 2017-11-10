@@ -18,6 +18,7 @@ import android.widget.Toast;
 import com.example.sasalog.orderstore.myData.DatabaseHelper;
 import com.example.sasalog.orderstore.myData.OrderStoreContract;
 
+import static android.content.ContentValues.TAG;
 import static com.example.sasalog.orderstore.myData.OrderProviderContract.AUTHORITY;
 import static com.example.sasalog.orderstore.myData.OrderProviderContract.CUSTOMER_BASE_PATH;
 import static com.example.sasalog.orderstore.myData.OrderProviderContract.CUSTOMER;
@@ -150,25 +151,61 @@ public class OrderProvider extends ContentProvider {
 
     @Override
     public int delete(@NonNull Uri uri, @Nullable String s, @Nullable String[] strings) {
-//        int deletedValue = 0;
-//        switch (uriMatcher.match(uri)) {
-//            case CUSTOMER:
-                return database.delete(OrderStoreContract.OrderStoreEntry.TABLE_CUSTOMER, s, strings);
-//                break;
-////            case PRODUCT:
-////                deletedValue = database.delete(OrderStoreContract.OrderStoreEntry.TABLE_PRODUCT, s, strings);
-////                break;
-//////            case CUSTOMER_ID:
-//////                deletedValue = database.delete(OrderStoreContract.OrderStoreEntry.TABLE_CUSTOMER, s, strings);
-//////                break;
-//////            case PRODUCT_ID:
-//////                deletedValue = database.delete(OrderStoreContract.OrderStoreEntry.TABLE_PRODUCT, s, strings);
-//////                break;
-////            default:
-////                Log.d("OrderProviderDelete", "Error Deleting data");
-////                break;
-////        }
-////        return deletedValue;
+        DatabaseHelper  helper= new DatabaseHelper(getContext());
+        database= helper.getWritableDatabase();
+        int deletedRows= 0;
+        String table= "";
+        String whereClause= "";
+
+        switch (uriMatcher.match(uri)) {
+            case CUSTOMER:
+                table= OrderStoreContract.OrderStoreEntry.TABLE_CUSTOMER;
+                whereClause= s;
+                break;
+            case ORDER:
+                table= OrderStoreContract.OrderStoreEntry.TABLE_ORDERS;
+                whereClause= s;
+            case PRODUCT:
+                table= OrderStoreContract.OrderStoreEntry.TABLE_PRODUCT;
+                whereClause= s;
+                break;
+            case CUSTOMER_ID:
+                String customerId= uri.getLastPathSegment();
+                table= OrderStoreContract.OrderStoreEntry.TABLE_CUSTOMER;
+                whereClause= BaseColumns._ID + "=" + customerId;
+                if (TextUtils.isEmpty(s)){
+                    s= null;
+                } else {
+                    whereClause += " and " + s;
+                }
+                break;
+            case PRODUCT_ID:
+                String productId= uri.getLastPathSegment();
+                table= OrderStoreContract.OrderStoreEntry.TABLE_PRODUCT;
+                whereClause= BaseColumns._ID + "=" + productId;
+                if (TextUtils.isEmpty(s)){
+                    s= null;
+                } else {
+                    whereClause += " and " + s;
+                }
+                break;
+            case ORDER_ID:
+                String orderId= uri.getLastPathSegment();
+                table= OrderStoreContract.OrderStoreEntry.TABLE_ORDERS;
+                whereClause= BaseColumns._ID + "=" + orderId;
+                if (TextUtils.isEmpty(s)){
+                    s= null;
+                } else {
+                    whereClause += " and " + s;
+                }
+                break;
+            default:
+                Log.d("OrderProviderDelete", "Error Deleting data");
+                break;
+        }
+        deletedRows= database.delete(table, whereClause, strings);
+        getContext().getContentResolver().notifyChange(uri, null);
+        return deletedRows;
     }
 
     @Override
@@ -204,7 +241,8 @@ public class OrderProvider extends ContentProvider {
                 if (TextUtils.isEmpty(s)){
                     s= null;
                 } else {
-                    whereClause += " and " +s;
+//                    whereClause += " and " +s;
+                    whereClause= s;
                 }
                 break;
 

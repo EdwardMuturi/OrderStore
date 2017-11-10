@@ -7,6 +7,14 @@
     android:layout_height="match_parent"
     tools:context="com.example.sasalog.orderstore.MainMenu">
 
+    <TextView
+        android:layout_width="200sp"
+        android:layout_marginRight="10sp"
+        android:id="@+id/txt_from_login"
+        android:textSize="7pt"
+        android:paddingTop="10dp"
+        android:layout_height="50sp"
+        android:layout_gravity="end"/>
     <Button
         android:layout_width="match_parent"
         android:layout_height="70sp"
