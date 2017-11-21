@@ -12,11 +12,11 @@ public class MainMenu extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main_menu);
-        //extract email string from sign in activity
+        //extract user_name string from sign in activity
         Intent intent= getIntent();
         String message= intent.getStringExtra(LoginActivity.EXTRA_MESSAGE);
 
-        //show email of logged in user
+        //show user_name of logged in user
         TextView loggedUser= (TextView) findViewById(R.id.txt_from_login);
         loggedUser.setText(message);
     }
