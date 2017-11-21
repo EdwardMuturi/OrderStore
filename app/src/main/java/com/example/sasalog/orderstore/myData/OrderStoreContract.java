@@ -8,9 +8,9 @@ public class OrderStoreContract {
     public static final class OrderStoreEntry implements BaseColumns{
         //table names
         public  static final String TABLE_CUSTOMER = "Customers";
-        public  static final String TABLE_PRODUCT = "product";
-        public  static final String TABLE_ORDERS = "orders";
-        public  static final String TABLE_ORDERLIST = "orderList";
+        public  static final String TABLE_PRODUCT = "Products";
+        public  static final String TABLE_ORDERS = "Orders";
+        public  static final String TABLE_ORDERLIST = "orderLists";
 
         //Customer Table - column names
         public static final String COLUMN_FIRST_NAME="firstName";
