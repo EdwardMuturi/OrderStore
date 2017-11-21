@@ -41,10 +41,9 @@
         <provider
             android:name=".OrderProvider"
             android:authorities="com.example.orderstore.orderprovider"
-            android:enabled="true"
             android:exported="true"
-            android:grantUriPermissions="true"
-            android:readPermission="com.example.orderstore.orderprovider.READ" />
+            android:grantUriPermissions="true" />
+            <!--android:readPermission="com.example.orderstore.orderprovider.READ_CONTENT" />-->
 
         <activity android:name=".OrderLinesActivity">
             android:parentActivityName=".MainMenu">
