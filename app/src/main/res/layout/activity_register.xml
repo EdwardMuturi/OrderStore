@@ -31,10 +31,10 @@
             <AutoCompleteTextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:hint="@string/prompt_user_name"
+                android:hint="@string/prompt_customer_name"
                 android:inputType="textAutoComplete"
                 android:maxLines="1"
-                android:id="@+id/register_user_name"/>
+                android:id="@+id/register_customer_name"/>
         </android.support.design.widget.TextInputLayout>
 
 
@@ -71,6 +71,16 @@
                 android:inputType="textPassword"
                 android:maxLines="1"
                 android:singleLine="true" />
+
+        </android.support.design.widget.TextInputLayout>
+
+        <android.support.design.widget.TextInputLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+            <android.support.v7.widget.AppCompatSpinner
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/priviledge_spinner"/>
 
         </android.support.design.widget.TextInputLayout>
 

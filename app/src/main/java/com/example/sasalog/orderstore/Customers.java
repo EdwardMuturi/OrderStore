@@ -9,13 +9,17 @@ public class Customers {
     String firstName;
     String lastName;
     String telephone;
+    String password;
+    String priviledge;
 
     //constructors
     public  Customers(){
     }
 
-    public Customers(int id, String firstName, String lastName, String telephone){
+    public Customers(int id, String firstName, String lastName, String telephone, String password, String priviledge){
         this.id= id;
+        this.password= password;
+        this.priviledge= priviledge;
         this.firstName= firstName;
         this.lastName= lastName;
         this.telephone= telephone;
@@ -33,6 +37,14 @@ public class Customers {
 
     public void setFirstName(String firstName){
         this.firstName= firstName;
+    }
+
+    public void setPassword(String password){
+        this.password= password;
+    }
+
+    public void setPriviledge(String priviledge){
+        this.priviledge= priviledge;
     }
 
     public  void setLastName(String lastName){
@@ -59,4 +71,8 @@ public class Customers {
     public String getTelephone(){
         return this.telephone;
     }
+
+    public  String getPassword(){return this.password; }
+
+    public String getPriviledge(){return this.priviledge; }
 }

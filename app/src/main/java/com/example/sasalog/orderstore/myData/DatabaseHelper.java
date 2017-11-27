@@ -18,6 +18,8 @@ import java.util.List;
 import static android.provider.BaseColumns._ID;
 import static com.example.sasalog.orderstore.myData.OrderStoreContract.OrderStoreEntry.COLUMN_FIRST_NAME;
 import static com.example.sasalog.orderstore.myData.OrderStoreContract.OrderStoreEntry.COLUMN_LAST_NAME;
+import static com.example.sasalog.orderstore.myData.OrderStoreContract.OrderStoreEntry.COLUMN_PASSWORD;
+import static com.example.sasalog.orderstore.myData.OrderStoreContract.OrderStoreEntry.COLUMN_PRIVILEDGE;
 import static com.example.sasalog.orderstore.myData.OrderStoreContract.OrderStoreEntry.COLUMN_PRODUCT_NAME;
 import static com.example.sasalog.orderstore.myData.OrderStoreContract.OrderStoreEntry.COLUMN_PRODUCT_PRICE;
 import static com.example.sasalog.orderstore.myData.OrderStoreContract.OrderStoreEntry.COLUMN_QUANTITY;
@@ -51,6 +53,8 @@ public class DatabaseHelper extends SQLiteOpenHelper {
             OrderStoreContract.OrderStoreEntry._ID +" INTEGER PRIMARY KEY AUTOINCREMENT," +
             COLUMN_FIRST_NAME + " TEXT, " +
             OrderStoreContract.OrderStoreEntry.COLUMN_LAST_NAME + " TEXT , " +
+            OrderStoreContract.OrderStoreEntry.COLUMN_PASSWORD + "TEXT," +
+            OrderStoreContract.OrderStoreEntry.COLUMN_PRIVILEDGE + "TEXT," +
             OrderStoreContract.OrderStoreEntry.COLUMN_TELEPHONE + " TEXT " +
             "); ";
     //product table sql
@@ -105,6 +109,8 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         values.put(COLUMN_FIRST_NAME, customer.getFirstName());
         values.put(COLUMN_LAST_NAME, customer.getLastName());
         values.put(COLUMN_TELEPHONE, customer.getTelephone());
+        values.put(COLUMN_PASSWORD, customer.getPassword());
+        values.put(COLUMN_PRIVILEDGE, customer.getPriviledge());
 
         //insert row
         return db.insert(OrderStoreContract.OrderStoreEntry.TABLE_CUSTOMER, null, values);

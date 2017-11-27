@@ -59,7 +59,7 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
     private UserLoginTask mAuthTask = null;
 
     // UI references.
-    private AutoCompleteTextView mUserNameView;
+    private AutoCompleteTextView mCustomerNameView;
     private EditText mPasswordView;
     private View mProgressView;
     private View mLoginFormView;
@@ -70,12 +70,12 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
         setContentView(R.layout.activity_login);
         setTitle(R.string.action_sign_in_short);
         // Set up the login form.
-        mUserNameView = (AutoCompleteTextView) findViewById(R.id.user_name);
+        mCustomerNameView = (AutoCompleteTextView) findViewById(R.id.customer_name);
         populateAutoComplete();
 
         Intent intent= getIntent();
-        String userName= intent.getStringExtra(RegisterActivity.Extra_User_NAME);
-        mUserNameView.setText(userName);
+        String customerName= intent.getStringExtra(RegisterActivity.Extra_Customer_NAME);
+        mCustomerNameView.setText(customerName);
 
         mPasswordView = (EditText) findViewById(R.id.password);
         mPasswordView.setOnEditorActionListener(new TextView.OnEditorActionListener() {
@@ -104,7 +104,7 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
 
     private void openMenu(){
         Intent intent= new Intent(LoginActivity.this, MainMenu.class);
-        String message= mUserNameView.getText().toString();
+        String message= mCustomerNameView.getText().toString();
         intent.putExtra(EXTRA_MESSAGE, message);
         startActivity(intent);
     }
@@ -125,7 +125,7 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
             return true;
         }
         if (shouldShowRequestPermissionRationale(READ_CONTACTS)) {
-            Snackbar.make(mUserNameView, R.string.permission_rationale, Snackbar.LENGTH_INDEFINITE)
+            Snackbar.make(mCustomerNameView, R.string.permission_rationale, Snackbar.LENGTH_INDEFINITE)
                     .setAction(android.R.string.ok, new View.OnClickListener() {
                         @Override
                         @TargetApi(Build.VERSION_CODES.M)
@@ -164,11 +164,11 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
         }
 
         // Reset errors.
-        mUserNameView.setError(null);
+        mCustomerNameView.setError(null);
         mPasswordView.setError(null);
 
         // Store values at the time of the login attempt.
-        String email = mUserNameView.getText().toString();
+        String email = mCustomerNameView.getText().toString();
         String password = mPasswordView.getText().toString();
 
         boolean cancel = false;
@@ -183,12 +183,12 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
 
         // Check for a valid user_name address.
         if (TextUtils.isEmpty(email)) {
-            mUserNameView.setError(getString(R.string.error_field_required));
-            focusView = mUserNameView;
+            mCustomerNameView.setError(getString(R.string.error_field_required));
+            focusView = mCustomerNameView;
             cancel = true;
         } else if (!isEmailValid(email)) {
-            mUserNameView.setError(getString(R.string.error_invalid_email));
-            focusView = mUserNameView;
+            mCustomerNameView.setError(getString(R.string.error_invalid_email));
+            focusView = mCustomerNameView;
             cancel = true;
         }
 
@@ -291,7 +291,7 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
                 new ArrayAdapter<>(LoginActivity.this,
                         android.R.layout.simple_dropdown_item_1line, emailAddressCollection);
 
-        mUserNameView.setAdapter(adapter);
+        mCustomerNameView.setAdapter(adapter);
     }
 
     public void Register(View view) {

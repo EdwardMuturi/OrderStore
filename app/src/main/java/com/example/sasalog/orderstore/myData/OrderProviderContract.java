@@ -36,7 +36,7 @@ public class OrderProviderContract {
     public static final int ORDER_LIST= 7;
     public static final int ORDER_LIST_ID= 8;
 
-// used indicate upate of an extsting note
+// used indicate update of an extsting note
     public static final String CONTENT_ITEM_TYPE="Customer";
     public static final String PRODUCT_CONTENT_ITEM_TYPE="Product";
     public static final String ORDER_ITEM_TYPE="Order";

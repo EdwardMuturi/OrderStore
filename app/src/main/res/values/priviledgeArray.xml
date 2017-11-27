@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string-array name="access_levels_array">
+        <item>Admin </item>
+        <item>Normal</item>
+    </string-array>
+</resources>

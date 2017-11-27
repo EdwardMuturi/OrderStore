@@ -35,10 +35,10 @@
                 android:layout_height="wrap_content">
 
                 <AutoCompleteTextView
-                    android:id="@+id/user_name"
+                    android:id="@+id/customer_name"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:hint="@string/prompt_user_name"
+                    android:hint="@string/prompt_customer_name"
                     android:inputType="text"
                     android:maxLines="1"
                     android:singleLine="true" />
